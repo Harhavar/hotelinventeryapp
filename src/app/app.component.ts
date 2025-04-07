@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
+import { CommonModule } from '@angular/common';
+import { NavbarComponent } from './navbar/navbar.component';
+import { RoomsComponent } from './rooms/rooms.component';
+import { RoomsListComponent } from './rooms-list/rooms-list.component';
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
+  selector: 'hinv-root',
+  standalone: true, // Mark the component as standalone
+  imports: [CommonModule, NavbarComponent, RoomsComponent,RoomsListComponent], // Use imports for standalone
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'hotelinventeryapp';
+  role = 'Admin';
 }

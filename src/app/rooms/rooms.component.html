@@ -1,0 +1,110 @@
+<!-- <h1>Welcome to {{hotelName}}</h1> -->
+<hinv-header></hinv-header>
+<div *ngIf="selectedRoom">
+{{ selectedRoom|json}}
+</div>
+<div>
+  <button type="button" (click)="addRoom()">add room</button>
+</div>
+<!-- ✅ Toggle room list visibility using *ngIf -->
+<div *ngIf="!hideRooms">
+  
+  <!-- ✅ Room List Component (Using @Input & @Output for communication) -->
+  <hinv-rooms-list 
+    [rooms]="roomList" [title]="title"
+    (selectedRoom)="selectRoom($event)">
+  </hinv-rooms-list>
+
+  <!-- ✅ Display Hotel Name -->
+  <h2>Welcome to {{ hotelName }}</h2>
+
+  <!-- ✅ Dynamic Styling: Changes color based on availability -->
+  <div [ngStyle]="{'color': rooms.availableRoom ? 'blue' : 'red'}">
+    Number of Rooms: <span [innerText]="numberOfRooms"></span>
+  </div>
+
+  <!-- ✅ Safe property access with "??" (nullish coalescing) -->
+  {{ rooms.availableRoom ?? "No rooms available" }}
+
+  <!-- ✅ Conditional Rendering using *ngIf -->
+  <div *ngIf="rooms?.availableRoom">
+    Rooms List is available.
+  </div>
+
+  <div>
+    <h3>Rooms List</h3>
+  </div>
+
+</div>
+
+<!-- ✅ Add a button to toggle room list visibility -->
+<button (click)="toggle()">Toggle</button>
+
+<!-- ✅ Pipe Usage for Data Transformation -->
+<!-- Angular provides several built-in pipes for transforming data -->
+<!-- Pipes: Transform data without modifying the original data -->
+<!-- 
+Types of Pipes:
+- DatePipe        -> {{ today | date:'fullDate' }}
+- UpperCasePipe   -> {{ hotelName | uppercase }}
+- LowerCasePipe   -> {{ hotelName | lowercase }}
+- CurrencyPipe    -> {{ price | currency:'USD' }}
+- DecimalPipe     -> {{ value | number:'1.2-2' }}
+- PercentPipe     -> {{ score | percent }}
+- JsonPipe        -> {{ objectData | json }}
+- SlicePipe       -> {{ list | slice:0:3 }}
+- AsyncPipe       -> {{ observableData$ | async }}
+-->
+
+<!-- ✅ Lifecycle Hooks in Angular -->
+<!-- 
+Angular components have a lifecycle managed by hooks:
+1️⃣ ngOnChanges        → Runs when input properties change.
+2️⃣ ngOnInit           → Runs once after component initialization.
+3️⃣ ngDoCheck          → Runs every change detection cycle.
+4️⃣ ngAfterContentInit → Runs after content (ng-content) is projected.
+5️⃣ ngAfterContentChecked → Runs after content projection check.
+6️⃣ ngAfterViewInit    → Runs after view and child components are initialized.
+7️⃣ ngAfterViewChecked → Runs after view and child component checks.
+8️⃣ ngOnDestroy        → Runs before component is destroyed.
+-->
+
+<!-- ✅ Component Communication Methods -->
+<!-- Angular allows multiple ways for components to communicate with each other -->
+<!-- 
+1️⃣ @Input & @Output (Parent-Child Communication)
+2️⃣ @ViewChild & @ContentChild (Direct Component Access)
+3️⃣ Services (Global Communication)
+-->
+
+<!-- ✅ API Calls in ngOnInit -->
+<!-- API calls should be placed inside ngOnInit() after component initialization -->
+
+
+<!-- change detection 
+changeDetection: ChangeDetectionStrategy.OnPush
+
+points to remember
+changeDetection: run  the change detection when something change detected on component 
+component should not change data internally
+incase passing or assingning some data should come from parent component the property should be immutable 
+
+
+ngOnChanges : life cycle hook can be applied to the component which has input property 
+u cannot apply to ngOnChanges anywhere 
+whenever new value get added we can detect using onChanges property
+
+
+ngDoCheck : life cycle hook can be applied to the component which 
+ngDoCheck event is executed in any event irrespetive of where this componennt is implemented 
+implementing this like cycle hook is very costly 
+what is the best use case for this 
+: incase u want to detect some changes which is not handled 
+try to avaid doCheck 
+
+
+ngAfterViewinit :
+
+
+view child:
+-->
