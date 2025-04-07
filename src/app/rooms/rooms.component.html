@@ -104,7 +104,15 @@ try to avaid doCheck
 
 
 ngAfterViewinit :
-
+is the component same all the view that is also initialised
 
 view child:
+
+ static used becouse this component is safe to be used inside onInit of its parent , if header component contains any asyncronus call it will block the call 
+ by default static will be false  
+  @ViewChild(HeaderComponent, {static : true}) headerComponent!: HeaderComponent; 
+
+
+ngAfterViewChecked
+
 -->
